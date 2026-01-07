@@ -232,6 +232,104 @@ test("custom icon", async () => {
   `)
 })
 
+test("non-square icon aspect-ratio", async () => {
+  const result = await postcss([
+    tailwindcss({
+      config: {
+        content: [
+          {
+            raw: '<span class="i-foo-wide i-foo-tall"></span>',
+            extension: "html",
+          },
+        ],
+        plugins: [
+          iconsPlugin({
+            collections: {
+              foo: {
+                icons: {
+                  wide: {
+                    body: '<rect width="24" height="12" fill="currentColor"/>',
+                    width: 24,
+                    height: 12,
+                  },
+                  tall: {
+                    body: '<rect width="12" height="24" fill="currentColor"/>',
+                    width: 12,
+                    height: 24,
+                  },
+                },
+              },
+            },
+          }),
+        ],
+      },
+    }),
+  ]).process(`
+.wide {
+  @apply i-foo-wide;
+}
+
+.tall {
+  @apply i-foo-tall;
+}
+`)
+
+
+  expect(result.css).toMatchInlineSnapshot(`
+    "
+    .wide {
+
+        display: inline-block;
+
+        height: 1em;
+
+        background-color: currentColor;
+
+        -webkit-mask-image: var(--svg);
+
+        mask-image: var(--svg);
+
+        -webkit-mask-repeat: no-repeat;
+
+        mask-repeat: no-repeat;
+
+        -webkit-mask-size: 100% 100%;
+
+        mask-size: 100% 100%;
+
+        --svg: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' width='24' height='12'%3E%3Crect width='24' height='12' fill='black'/%3E%3C/svg%3E\");
+
+        aspect-ratio: 24 / 12
+    }
+
+    .tall {
+
+        display: inline-block;
+
+        width: 1em;
+
+        background-color: currentColor;
+
+        -webkit-mask-image: var(--svg);
+
+        mask-image: var(--svg);
+
+        -webkit-mask-repeat: no-repeat;
+
+        mask-repeat: no-repeat;
+
+        -webkit-mask-size: 100% 100%;
+
+        mask-size: 100% 100%;
+
+        --svg: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 24' width='12' height='24'%3E%3Crect width='12' height='24' fill='black'/%3E%3C/svg%3E\");
+
+        aspect-ratio: 12 / 24
+    }
+    "
+    `)
+})
+
 test("set collection automatically", async () => {
   const processor = postcss([
     tailwindcss({
