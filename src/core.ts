@@ -124,6 +124,16 @@ export const generateIconComponent = (
     }
     return ""
   })
+
+  const aspectRatio = (data.width ?? 1) / (data.height ?? 1)
+
+  if (aspectRatio !== 1) {
+    Object.assign(rules, {
+      "aspect-ratio": `${data.width} / ${data.height}`,
+      ...(aspectRatio > 1 ? { width: "auto" } : { height: "auto" }),
+    })
+  }
+
   if (options.extraProperties) {
     Object.assign(rules, options.extraProperties)
   }
