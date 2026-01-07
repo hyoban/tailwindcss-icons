@@ -130,7 +130,7 @@ export const generateIconComponent = (
   if (aspectRatio !== 1) {
     Object.assign(rules, {
       "aspect-ratio": `${data.width} / ${data.height}`,
-      ...(aspectRatio > 1 ? { width: "auto" } : { height: "auto" }),
+      ...(aspectRatio > 1 ? { width: undefined } : { height: undefined }),
     })
   }
 
