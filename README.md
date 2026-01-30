@@ -32,15 +32,16 @@ With TailwindCSS v4 css config:
 With js config:
 
 ```css
-@config "path/to/your/tailwind.config.ts";
+@config "./tailwind.config.ts";
 ```
 
-In your `tailwind.config.js`:
+In your `tailwind.config.ts`:
 
-```js
-const { iconsPlugin, getIconCollections } = require("@egoist/tailwindcss-icons")
+```ts
+import type { Config } from "tailwindcss"
+import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons"
 
-module.exports = {
+export default {
   plugins: [
     iconsPlugin({
       // Select the icon collections you want to use
@@ -52,7 +53,7 @@ module.exports = {
       // and the more recommended way is to use `dynamicIconsPlugin`, see below.
     }),
   ],
-}
+} satisfies Config
 ```
 
 You also need to install `@iconify/json` (full icon collections, 50MB) or `@iconify-json/{collection_name}` (individual icon package):
@@ -91,8 +92,11 @@ Search the icon you want to use here: https://icones.js.org
 
 You can also use custom icons with this plugin, for example:
 
-```js
-module.exports = {
+```ts
+import type { Config } from "tailwindcss"
+import { iconsPlugin } from "@egoist/tailwindcss-icons"
+
+export default {
   plugins: [
     iconsPlugin({
       collections: {
@@ -110,7 +114,7 @@ module.exports = {
       },
     }),
   ],
-}
+} satisfies Config
 ```
 
 Then you can use this custom icon as class name: `i-foo-arrow-left`.
@@ -124,17 +128,18 @@ The idea is from [@iconify/tailwind](https://iconify.design/docs/usage/css/tailw
 thanks to the author of Iconify for the great work!
 
 If you want to install `@iconify/json` and use whatever icon you want,
-you should add another plugin to your `tailwind.config.js`.
+you should add another plugin to your `tailwind.config.ts`.
 
 This is because we can not provide autocomplete for all icons from `@iconify/json`,
 it will make your editor slow.
 
-```js
-const { iconsPlugin, dynamicIconsPlugin } = require("@egoist/tailwindcss-icons")
+```ts
+import type { Config } from "tailwindcss"
+import { iconsPlugin, dynamicIconsPlugin } from "@egoist/tailwindcss-icons"
 
-module.exports = {
+export default {
   plugins: [iconsPlugin(), dynamicIconsPlugin()],
-}
+} satisfies Config
 ```
 
 Then you can use icons dynamically like `<span class="i-[mdi-light--home]"></span>`.
