@@ -40,13 +40,12 @@
   "license": "MIT",
   "packageManager": "pnpm@10.28.2",
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@iconify-json/heroicons": "^1.2.3",
     "@iconify/json": "^2.2.433",
     "@iconify/types": "^2.0.0",
     "@types/node": "^25.1.0",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.54.0",
     "eslint": "^9.39.2",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
@@ -54,6 +53,7 @@
     "tailwindcss": "^3.4.19",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.54.0",
     "vitest": "^4.0.18"
   },
   "dependencies": {

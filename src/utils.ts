@@ -39,7 +39,7 @@ function callerPath2() {
   }
 
   const filePathPattern = new RegExp(
-    /\s*at (\/.*|[a-zA-Z]:\\(?:([^<>:"\/\\|?*]*[^<>:"\/\\|?*.]\\|..\\)*([^<>:"\/\\|?*]*[^<>:"\/\\|?*.]\\?|..\\))?):\d+:\d+/i,
+    /\s*at (\/.*|[a-zA-Z]:\\(?:([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\|..\\)*([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\?|..\\))?):\d+:\d+/i,
   )
   const result = filePathPattern.exec(data)
   if (!result) {

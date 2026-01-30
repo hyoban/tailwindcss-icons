@@ -20,7 +20,7 @@ export function getDynamicCSSRules(
   icon: string,
   options: GenerateOptions,
 ): Record<string, string> {
-  const nameParts = icon.split(/--|\:/)
+  const nameParts = icon.split(/--|:/)
   if (nameParts.length !== 2) {
     throw new Error(`Invalid icon name: "${icon}"`)
   }
