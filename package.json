@@ -38,26 +38,26 @@
     "lint": "eslint --max-warnings 0 ."
   },
   "license": "MIT",
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@10.28.2",
   "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
-    "@iconify-json/heroicons": "^1.2.2",
-    "@iconify/json": "^2.2.299",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@iconify-json/heroicons": "^1.2.3",
+    "@iconify/json": "^2.2.433",
     "@iconify/types": "^2.0.0",
-    "@types/node": "^22.10.10",
-    "@typescript-eslint/eslint-plugin": "^8.21.0",
-    "@typescript-eslint/parser": "^8.21.0",
-    "eslint": "^9.18.0",
-    "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^3.4.17",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.4"
+    "@types/node": "^25.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "eslint": "^9.39.2",
+    "postcss": "^8.5.6",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "tailwindcss": "^3.4.19",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
-    "@iconify/utils": "^2.2.1"
+    "@iconify/utils": "^3.1.0"
   },
   "peerDependencies": {
     "tailwindcss": "*"
