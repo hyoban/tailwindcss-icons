@@ -28,6 +28,13 @@ export type GenerateOptions = {
    * @default `undefined`
    */
   strokeWidth?: number
+
+  /**
+   * Default size unit
+   *
+   * @default em
+   */
+  sizeUnit?: string
 }
 
 declare const TSUP_FORMAT: "esm" | "cjs"
@@ -116,9 +123,10 @@ export const generateIconComponent = (
 
   const css = getIconCSS(data, {})
   const rules: Record<string, string> = {}
+  const sizeUnit: string = options.sizeUnit || 'em'
   css.replace(/^\s+([^:]+):\s*(.+);$/gm, (_, prop, value) => {
     if (prop === "width" || prop === "height") {
-      rules[prop] = `${options.scale}em`
+      rules[prop] = `${options.scale}${sizeUnit}`
     } else {
       rules[prop] = value
     }
