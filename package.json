@@ -47,6 +47,7 @@
     "tailwindcss": "*"
   },
   "dependencies": {
+    "@iconify/tools": "^5.0.2",
     "@iconify/utils": "^3.1.0"
   },
   "devDependencies": {
