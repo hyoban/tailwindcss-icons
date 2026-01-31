@@ -1,17 +1,17 @@
-import { expect, test } from "vitest"
+import { expect, it } from 'vitest'
 
-import { generateComponent, getIconCollections } from "./core"
+import { generateComponent, getIconCollections } from './core'
 
-test("generateComponent", () => {
-  const collections = getIconCollections(["mdi"])
+it('generateComponent', () => {
+  const collections = getIconCollections(['mdi'])
   expect(
     generateComponent(
-      { icons: collections["mdi"], name: "home" },
+      { icons: collections.mdi, name: 'home' },
       {
         scale: 1.5,
         extraProperties: {
-          "-webkit-mask-size": "contain",
-          "-webkit-mask-position": "center",
+          '-webkit-mask-size': 'contain',
+          '-webkit-mask-position': 'center',
         },
       },
     ),
@@ -33,12 +33,12 @@ test("generateComponent", () => {
   `)
 })
 
-test("generate component with custom stroke width", () => {
-  const collections = getIconCollections(["lucide", "mdi", "gala"])
+it('generate component with custom stroke width', () => {
+  const collections = getIconCollections(['lucide', 'mdi', 'gala'])
 
   expect(
     generateComponent(
-      { icons: collections["mdi"], name: "home" },
+      { icons: collections.mdi, name: 'home' },
       { strokeWidth: 1 },
     ),
   ).toMatchInlineSnapshot(`
@@ -59,7 +59,7 @@ test("generate component with custom stroke width", () => {
 
   expect(
     generateComponent(
-      { icons: collections["lucide"], name: "home" },
+      { icons: collections.lucide, name: 'home' },
       { strokeWidth: 1 },
     ),
   ).toMatchInlineSnapshot(`

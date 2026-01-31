@@ -1,12 +1,12 @@
-import fs from "fs"
-import { createRequire } from "module"
-import path from "path"
-import { getIconCSS, getIconData } from "@iconify/utils"
+import fs from 'node:fs'
+import { createRequire } from 'node:module'
+import path from 'node:path'
 
-import { callerPath } from "./utils"
+import type { IconifyIcon, IconifyJSON } from '@iconify/types'
+import { getIconCSS, getIconData } from '@iconify/utils'
 
-import type { CollectionNames } from "../types"
-import type { IconifyIcon, IconifyJSON } from "@iconify/types"
+import type { CollectionNames } from '../types'
+import { callerPath } from './utils'
 
 export type GenerateOptions = {
   /**
@@ -30,34 +30,35 @@ export type GenerateOptions = {
   strokeWidth?: number
 }
 
-declare const TSUP_FORMAT: "esm" | "cjs"
-const req =
-  typeof TSUP_FORMAT === "undefined" || TSUP_FORMAT === "cjs"
+declare const TSUP_FORMAT: 'esm' | 'cjs'
+const req
+  = typeof TSUP_FORMAT === 'undefined' || TSUP_FORMAT === 'cjs'
     ? require
     : createRequire(import.meta.url)
 
-export const localResolve = (cwd: string, id: string) => {
+export function localResolve(cwd: string, id: string) {
   try {
     const resolved = req.resolve(id, { paths: [cwd] })
     return resolved
-  } catch {
+  }
+  catch {
     return null
   }
 }
 
-export const isPackageExists = (id: string) => {
+export function isPackageExists(id: string) {
   const p = callerPath()
   const cwd = p ? path.dirname(p) : process.cwd()
   return Boolean(localResolve(cwd, id))
 }
 
 export function getIconCollections<T extends CollectionNames>(
-  include: T[] | "all",
+  include: T[] | 'all',
 ): Record<T, IconifyJSON> | Record<string, never> {
   const p = callerPath()
   const cwd = p ? path.dirname(p) : process.cwd()
 
-  const pkgPath = localResolve(cwd, "@iconify/json/package.json")
+  const pkgPath = localResolve(cwd, '@iconify/json/package.json')
   if (!pkgPath) {
     if (Array.isArray(include)) {
       return include.reduce(
@@ -79,30 +80,27 @@ export function getIconCollections<T extends CollectionNames>(
     return {} as Record<string, never>
   }
   const pkgDir = path.dirname(pkgPath)
-  const files = fs.readdirSync(path.join(pkgDir, "json"))
+  const files = fs.readdirSync(path.join(pkgDir, 'json'))
   const collections: Record<string, IconifyJSON> = {}
   for (const file of files) {
     if (
-      include === "all" ||
-      (include as string[]).includes(file.replace(".json", ""))
+      include === 'all'
+      || (include as string[]).includes(file.replace('.json', ''))
     ) {
-      const json: IconifyJSON = req(path.join(pkgDir, "json", file))
+      const json: IconifyJSON = req(path.join(pkgDir, 'json', file))
       collections[json.prefix] = json
     }
   }
   return collections
 }
 
-export const generateIconComponent = (
-  data: IconifyIcon,
-  options: GenerateOptions,
-) => {
+export function generateIconComponent(data: IconifyIcon, options: GenerateOptions) {
   if (options.strokeWidth) {
     const strokeWidthRegex = /stroke-width="\d+"/g
     const match = data.body.match(strokeWidthRegex)
     const noStrokeWidth = !match
-    const isAllStrokeWidthAreEqual =
-      match && match.every((strokeWidth) => strokeWidth === match[0])
+    const isAllStrokeWidthAreEqual
+      = match && match.every(strokeWidth => strokeWidth === match[0])
     if (isAllStrokeWidthAreEqual) {
       data.body = data.body.replace(
         strokeWidthRegex,
@@ -117,12 +115,13 @@ export const generateIconComponent = (
   const css = getIconCSS(data, {})
   const rules: Record<string, string> = {}
   css.replace(/^\s+([^:]+):\s*(.+);$/gm, (_, prop, value) => {
-    if (prop === "width" || prop === "height") {
+    if (prop === 'width' || prop === 'height') {
       rules[prop] = `${options.scale}em`
-    } else {
+    }
+    else {
       rules[prop] = value
     }
-    return ""
+    return ''
   })
   if (options.extraProperties) {
     Object.assign(rules, options.extraProperties)
@@ -130,17 +129,15 @@ export const generateIconComponent = (
   return rules
 }
 
-export const generateComponent = (
-  {
-    name,
-    icons,
-  }: {
-    name: string
-    icons: IconifyJSON
-  },
-  options: GenerateOptions,
-) => {
+export function generateComponent({
+  name,
+  icons,
+}: {
+  name: string
+  icons: IconifyJSON
+}, options: GenerateOptions) {
   const data = getIconData(icons, name)
-  if (!data) return null
+  if (!data)
+    return null
   return generateIconComponent(data, options)
 }

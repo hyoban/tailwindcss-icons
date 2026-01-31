@@ -1,27 +1,26 @@
-import { parseIconSet } from "@iconify/utils"
-import plugin from "tailwindcss/plugin.js"
+import type { IconifyJSONIconsData } from '@iconify/types'
+import { parseIconSet } from '@iconify/utils'
+import plugin from 'tailwindcss/plugin.js'
 
-import { collectionNames } from "../types"
+import type { CollectionNames } from '../types'
+import { collectionNames } from '../types'
+import type { GenerateOptions } from './core'
 import {
   generateIconComponent,
   getIconCollections,
   isPackageExists,
-} from "./core"
-import { getDynamicCSSRules } from "./dynamic"
+} from './core'
+import { getDynamicCSSRules } from './dynamic'
+import type { Optional } from './utils'
 
-import type { CollectionNames } from "../types"
-import type { GenerateOptions } from "./core"
-import type { Optional } from "./utils"
-import type { IconifyJSONIconsData } from "@iconify/types"
-
-export { getIconCollections, collectionNames, type CollectionNames }
+export { type CollectionNames, collectionNames, getIconCollections }
 
 type CollectionNamesAlias = {
   [key in CollectionNames]?: string
 }
 
 export type IconsPluginOptions = {
-  collections?: Record<string, Optional<IconifyJSONIconsData, "prefix">>
+  collections?: Record<string, Optional<IconifyJSONIconsData, 'prefix'>>
   /**
    * alias to customize collection names
    * @default {}
@@ -36,25 +35,23 @@ export type IconsPluginOptions = {
 } & GenerateOptions
 
 type PluginFn = Parameters<typeof plugin>[0]
-const getPluginFunction = (
-  iconsPluginOptions?: IconsPluginOptions,
-): PluginFn => {
+function getPluginFunction(iconsPluginOptions?: IconsPluginOptions): PluginFn {
   const {
     collections: propsCollections,
     scale = 1,
-    prefix = "i",
+    prefix = 'i',
     extraProperties = {},
     strokeWidth,
     collectionNamesAlias = {},
   } = iconsPluginOptions ?? {}
 
-  const collections =
-    propsCollections ??
-    getIconCollections(
-      collectionNames.filter((name) =>
-        isPackageExists(`@iconify-json/${name}`),
-      ),
-    )
+  const collections
+    = propsCollections
+      ?? getIconCollections(
+        collectionNames.filter(name =>
+          isPackageExists(`@iconify-json/${name}`),
+        ),
+      )
   const components: Record<string, Record<string, string>> = {}
 
   for (const prefix of Object.keys(collections) as CollectionNames[]) {
@@ -63,9 +60,10 @@ const getPluginFunction = (
       prefix,
     }
     parseIconSet(collection, (name, data) => {
-      if (!data) return
-      const collectionName =
-        collectionNamesAlias[prefix as CollectionNames] ?? prefix
+      if (!data)
+        return
+      const collectionName
+        = collectionNamesAlias[prefix as CollectionNames] ?? prefix
       components[`${collectionName}-${name}`] = generateIconComponent(data, {
         scale,
         extraProperties,
@@ -77,7 +75,8 @@ const getPluginFunction = (
     matchComponents(
       {
         [prefix]: (value) => {
-          if (typeof value === "string") return components[value] ?? null
+          if (typeof value === 'string')
+            return components[value] ?? null
           return value
         },
       },
@@ -88,18 +87,16 @@ const getPluginFunction = (
   }
 }
 
-export const iconsPlugin = (iconsPluginOptions?: IconsPluginOptions) => {
+export function iconsPlugin(iconsPluginOptions?: IconsPluginOptions) {
   return plugin(getPluginFunction(iconsPluginOptions))
 }
 
-export const dynamicIconsPlugin = (
-  iconsPluginOptions?: Omit<
-    IconsPluginOptions,
-    "collections" | "collectionNamesAlias"
-  >,
-) => {
+export function dynamicIconsPlugin(iconsPluginOptions?: Omit<
+  IconsPluginOptions,
+    'collections' | 'collectionNamesAlias'
+>) {
   const {
-    prefix = "i",
+    prefix = 'i',
     scale = 1,
     strokeWidth,
     extraProperties = {},
@@ -107,7 +104,7 @@ export const dynamicIconsPlugin = (
 
   return plugin(({ matchComponents }) => {
     matchComponents({
-      [prefix]: (value) =>
+      [prefix]: value =>
         getDynamicCSSRules(value, { scale, extraProperties, strokeWidth }),
     })
   })

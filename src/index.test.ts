@@ -1,22 +1,22 @@
-import postcss from "postcss"
-import tailwindcss from "tailwindcss"
-import { expect, test } from "vitest"
+import postcss from 'postcss'
+import tailwindcss from 'tailwindcss'
+import { expect, it } from 'vitest'
 
-import { dynamicIconsPlugin, getIconCollections, iconsPlugin } from "."
+import { dynamicIconsPlugin, getIconCollections, iconsPlugin } from '.'
 
-test("main", async () => {
+it('main', async () => {
   const result = await postcss([
     tailwindcss({
       config: {
         content: [
           {
             raw: '<span class="i-tabler-plus"><i class="i-mdi-home"></i></span>',
-            extension: "html",
+            extension: 'html',
           },
         ],
         plugins: [
           iconsPlugin({
-            collections: getIconCollections(["mdi", "tabler"]),
+            collections: getIconCollections(['mdi', 'tabler']),
           }),
         ],
       },
@@ -137,14 +137,14 @@ test("main", async () => {
   `)
 })
 
-test("custom icon", async () => {
+it('custom icon', async () => {
   const result = await postcss([
     tailwindcss({
       config: {
         content: [
           {
             raw: '<span class="i-foo-home"></span>',
-            extension: "html",
+            extension: 'html',
           },
         ],
         plugins: [
@@ -152,12 +152,12 @@ test("custom icon", async () => {
             collections: {
               foo: {
                 icons: {
-                  "arrow-left": {
+                  'arrow-left': {
                     body: '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>',
                     width: 20,
                     height: 20,
                   },
-                  animate: {
+                  'animate': {
                     body: `<circle fill="currentColor" stroke="none" cx="25" cy="10" r="6"><animate attributeName="opacity" dur="1s" values="0;1;0" from="0" to="1" repeatCount="indefinite" begin="0.1"/></circle>`,
                   },
                 },
@@ -232,14 +232,14 @@ test("custom icon", async () => {
   `)
 })
 
-test("set collection automatically", async () => {
+it('set collection automatically', async () => {
   const processor = postcss([
     tailwindcss({
       config: {
         content: [
           {
-            raw: "",
-            extension: "html",
+            raw: '',
+            extension: 'html',
           },
         ],
         plugins: [iconsPlugin()],
@@ -282,21 +282,21 @@ test("set collection automatically", async () => {
   )
 })
 
-test("custom icon collection name", async () => {
+it('custom icon collection name', async () => {
   const result = await postcss([
     tailwindcss({
       config: {
         content: [
           {
             raw: '<span class="i-hero-archive-box"></span>',
-            extension: "html",
+            extension: 'html',
           },
         ],
         plugins: [
           iconsPlugin({
-            collections: getIconCollections(["heroicons"]),
+            collections: getIconCollections(['heroicons']),
             collectionNamesAlias: {
-              heroicons: "hero",
+              heroicons: 'hero',
             },
           }),
         ],
@@ -337,14 +337,14 @@ test("custom icon collection name", async () => {
   `)
 })
 
-test("generate icon dynamically", async () => {
+it('generate icon dynamically', async () => {
   const result = await postcss([
     tailwindcss({
       config: {
         content: [
           {
             raw: '<span class="i-heroicons-archive-box"></span>',
-            extension: "html",
+            extension: 'html',
           },
         ],
         plugins: [iconsPlugin(), dynamicIconsPlugin()],
@@ -385,17 +385,17 @@ test("generate icon dynamically", async () => {
   `)
 })
 
-test("get all icon explicitly", { timeout: 20000 }, async () => {
+it('get all icon explicitly', { timeout: 20000 }, async () => {
   const result = await postcss([
     tailwindcss({
       config: {
         content: [
           {
             raw: '<span class="i-heroicons-archive-box"></span>',
-            extension: "html",
+            extension: 'html',
           },
         ],
-        plugins: [iconsPlugin({ collections: getIconCollections("all") })],
+        plugins: [iconsPlugin({ collections: getIconCollections('all') })],
       },
     }),
   ]).process(`@tailwind components;
