@@ -35,7 +35,8 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --max-warnings 0 ."
+    "lint": "eslint --max-warnings 0 .",
+    "typecheck": "tsc --noEmit"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.28.2",
