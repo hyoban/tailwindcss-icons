@@ -6,6 +6,10 @@
     "access": "public"
   },
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyoban/tailwindcss-icons.git"
+  },
   "files": [
     "dist"
   ],
