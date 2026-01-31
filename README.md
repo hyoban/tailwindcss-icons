@@ -12,6 +12,8 @@
 
 ## Install
 
+[![pkg.pr.new](https://pkg.pr.new/badge/hyoban/tailwindcss-icons)](https://pkg.pr.new/~hyoban/tailwindcss-icons)
+
 ```sh
 npm i @egoist/tailwindcss-icons -D
 ```
