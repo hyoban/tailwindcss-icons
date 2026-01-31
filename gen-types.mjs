@@ -1,15 +1,19 @@
 // @ts-check
-import fs from "fs"
-import { createRequire } from "module"
+import fs from 'node:fs'
+import { createRequire } from 'node:module'
 
 const req = createRequire(import.meta.url)
-const collections = req("@iconify/json/collections.json")
+const collections = req('@iconify/json/collections.json')
 
 fs.writeFileSync(
-  "types.ts",
-  `export const collectionNames = [${Object.keys(collections)
-    .map((v) => JSON.stringify(v))
-    .join(", ")}] as const
-/** All the available icon collections when you have \`@iconify/json\` installed  */\nexport type CollectionNames = typeof collectionNames[number]
+  'types.ts',
+  `export const collectionNames = [
+  ${Object.keys(collections)
+    .sort()
+    .map(v => JSON.stringify(v))
+    .join(', ')}
+] as const
+/** All the available icon collections when you have \`@iconify/json\` installed  */
+export type CollectionNames = typeof collectionNames[number]
 `,
 )

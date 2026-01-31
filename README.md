@@ -1,10 +1,10 @@
 **💛 You can help the author become a full-time open-source maintainer by [sponsoring him on GitHub](https://github.com/sponsors/egoist).**
 
----
+- - -
 
 # @egoist/tailwindcss-icons
 
-> Use any icon from [Iconify](https://iconify.design/)
+> Use any icon from [Iconify](https://iconify.design)
 
 [![npm version](https://badgen.net/npm/v/@egoist/tailwindcss-icons)](https://npm.im/@egoist/tailwindcss-icons) [![npm downloads](https://badgen.net/npm/dm/@egoist/tailwindcss-icons)](https://npm.im/@egoist/tailwindcss-icons)
 
@@ -12,7 +12,7 @@
 
 ## Install
 
-```bash
+```sh
 npm i @egoist/tailwindcss-icons -D
 ```
 
@@ -38,8 +38,8 @@ With js config:
 In your `tailwind.config.ts`:
 
 ```ts
-import type { Config } from "tailwindcss"
-import { iconsPlugin, getIconCollections } from "@egoist/tailwindcss-icons"
+import { getIconCollections, iconsPlugin } from '@egoist/tailwindcss-icons'
+import type { Config } from 'tailwindcss'
 
 export default {
   plugins: [
@@ -47,7 +47,7 @@ export default {
       // Select the icon collections you want to use
       // You can also ignore this option to automatically discover all individual icon packages you have installed
       // If you install @iconify/json, you should explicitly specify the collections you want to use, like this:
-      collections: getIconCollections(["mdi", "lucide"]),
+      collections: getIconCollections(['mdi', 'lucide']),
       // If you want to use all icons from @iconify/json, you can do this:
       // collections: getIconCollections("all"),
       // and the more recommended way is to use `dynamicIconsPlugin`, see below.
@@ -58,7 +58,7 @@ export default {
 
 You also need to install `@iconify/json` (full icon collections, 50MB) or `@iconify-json/{collection_name}` (individual icon package):
 
-```bash
+```sh
 # install every icon:
 npm i @iconify/json -D
 
@@ -93,8 +93,8 @@ Search the icon you want to use here: https://icones.js.org
 You can also use custom icons with this plugin, for example:
 
 ```ts
-import type { Config } from "tailwindcss"
-import { iconsPlugin } from "@egoist/tailwindcss-icons"
+import { iconsPlugin } from '@egoist/tailwindcss-icons'
+import type { Config } from 'tailwindcss'
 
 export default {
   plugins: [
@@ -102,7 +102,7 @@ export default {
       collections: {
         foo: {
           icons: {
-            "arrow-left": {
+            'arrow-left': {
               // svg body
               body: '<path d="M10 19l-7-7m0 0l7-7m-7 7h18"/>',
               // svg width and height, optional
@@ -134,8 +134,8 @@ This is because we can not provide autocomplete for all icons from `@iconify/jso
 it will make your editor slow.
 
 ```ts
-import type { Config } from "tailwindcss"
-import { iconsPlugin, dynamicIconsPlugin } from "@egoist/tailwindcss-icons"
+import { dynamicIconsPlugin, iconsPlugin } from '@egoist/tailwindcss-icons'
+import type { Config } from 'tailwindcss'
 
 export default {
   plugins: [iconsPlugin(), dynamicIconsPlugin()],

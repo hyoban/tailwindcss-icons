@@ -1,20 +1,20 @@
 {
   "name": "@egoist/tailwindcss-icons",
+  "type": "module",
   "version": "1.9.2",
+  "packageManager": "pnpm@10.28.2",
   "description": "Icons utility for TailwindCSS",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hyoban/tailwindcss-icons.git"
   },
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.js"
@@ -23,48 +23,56 @@
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       },
-      "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     }
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "prepare": "pnpm run gen-types",
-    "gen-types": "node ./gen-types.mjs",
+    "prepare": "simple-git-hooks",
+    "gen-types": "node ./gen-types.mjs && eslint --fix ./types.ts",
     "build-fast": "pnpm gen-types && tsup src/index.ts --format cjs,esm",
     "build": "pnpm run build-fast --dts-resolve",
     "prepublishOnly": "pnpm run build",
     "test": "vitest run",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --max-warnings 0 .",
+    "lint": "eslint --max-warnings 0",
+    "lint:fix": "eslint --max-warnings 0 --fix",
     "typecheck": "tsc --noEmit"
   },
-  "license": "MIT",
-  "packageManager": "pnpm@10.28.2",
+  "peerDependencies": {
+    "tailwindcss": "*"
+  },
+  "dependencies": {
+    "@iconify/utils": "^3.1.0"
+  },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@iconify-json/heroicons": "^1.2.3",
     "@iconify/json": "^2.2.433",
     "@iconify/types": "^2.0.0",
     "@types/node": "^25.1.0",
     "eslint": "^9.39.2",
+    "eslint-config-hyoban": "6.0.0-beta.3",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^3.4.19",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0",
     "vitest": "^4.0.18"
   },
-  "dependencies": {
-    "@iconify/utils": "^3.1.0"
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
   },
-  "peerDependencies": {
-    "tailwindcss": "*"
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }
