@@ -32,7 +32,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [lts/*]
+        node: [lts/*, ltx/-1]
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
 
