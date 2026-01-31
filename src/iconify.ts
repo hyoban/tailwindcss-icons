@@ -80,7 +80,8 @@ async function processIconSet(iconSet: IconSet): Promise<void> {
             return 'remove'
           }
 
-          throw new Error(`Unexpected color "${colorStr}" in attribute ${attr}`)
+          // Icon is not monotone
+          return color
         },
       })
 
@@ -216,7 +217,8 @@ export async function importSvgCollections(
   const collections: Record<string, IconifyJSON> = {}
 
   for (const dir of svgDirs) {
-    const prefix = path.basename(dir)
+    const relativePath = path.relative(source, dir)
+    const prefix = relativePath.split(path.sep).join('-')
 
     const iconSet = await importDirectory(dir, {
       prefix,
