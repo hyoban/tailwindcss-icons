@@ -1,18 +1,20 @@
-import { collectionNames } from "../types"
-import { generateComponent, getIconCollections } from "./core"
+import type { IconifyJSON } from '@iconify/types'
 
-import type { CollectionNames } from "../types"
-import type { GenerateOptions } from "./core"
-import type { IconifyJSON } from "@iconify/types"
+import type { CollectionNames } from '../types'
+import { collectionNames } from '../types'
+import type { GenerateOptions } from './core'
+import { generateComponent, getIconCollections } from './core'
 
 const cache = new Map<CollectionNames, IconifyJSON>()
 
 function getIconCollection(name: CollectionNames) {
   const cached = cache.get(name)
-  if (cached) return cached
+  if (cached)
+    return cached
 
   const collection = getIconCollections([name])[name]
-  if (collection) cache.set(name, collection)
+  if (collection)
+    cache.set(name, collection)
   return collection
 }
 

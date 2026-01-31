@@ -1,21 +1,18 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
     "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
+    "lib": ["es2022"],
     "moduleDetection": "force",
-    "isolatedModules": true,
-    /* Strictness */
+    "module": "preserve",
+    "resolveJsonModule": true,
+    "allowJs": true,
     "strict": true,
+    "noImplicitOverride": true,
     "noUncheckedIndexedAccess": true,
-    /* If NOT transpiling with TypeScript: */
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
     "noEmit": true,
-    /* If your code doesn't run in the DOM: */
-    "lib": ["es2022"]
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
   }
 }

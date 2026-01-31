@@ -1,0 +1,30 @@
+{
+  "src/core.ts": {
+    "node/prefer-global/process": {
+      "count": 2
+    },
+    "regexp/no-super-linear-backtracking": {
+      "count": 2
+    }
+  },
+  "src/utils.ts": {
+    "@typescript-eslint/no-unused-expressions": {
+      "count": 1
+    },
+    "prefer-regex-literals": {
+      "count": 1
+    },
+    "regexp/no-dupe-disjunctions": {
+      "count": 1
+    },
+    "regexp/no-unused-capturing-group": {
+      "count": 2
+    },
+    "ts/no-unused-expressions": {
+      "count": 1
+    },
+    "unicorn/error-message": {
+      "count": 2
+    }
+  }
+}

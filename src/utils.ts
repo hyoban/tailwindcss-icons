@@ -13,33 +13,35 @@ function callsites() {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     new Error().stack
     return result
-  } finally {
+  }
+  finally {
     Error.prepareStackTrace = _prepareStackTrace
   }
 }
 
 function callerPath1() {
   const callSites = callsites()
-  if (!callSites[0]) return
+  if (!callSites[0])
+    return
   return callSites[0].getFileName()
 }
 
 function callerPath2() {
   const error = new Error()
-  const stack = error.stack?.split("\n") as string[]
+  const stack = error.stack?.split('\n') as string[]
 
   const data = stack.find(
-    (line) =>
-      !line.trim().startsWith("Error") &&
-      !line.includes("(") &&
-      !line.includes(")"),
+    line =>
+      !line.trim().startsWith('Error')
+      && !line.includes('(')
+      && !line.includes(')'),
   )
   if (!data) {
     return
   }
 
   const filePathPattern = new RegExp(
-    /\s*at (\/.*|[a-zA-Z]:\\(?:([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\|..\\)*([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\?|..\\))?):\d+:\d+/i,
+    /\s*at (\/.*|[a-z]:\\(?:([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\|..\\)*([^<>:"/\\|?*]*[^<>:"/\\|?*.]\\?|..\\))?):\d+:\d+/i,
   )
   const result = filePathPattern.exec(data)
   if (!result) {
