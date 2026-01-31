@@ -39,8 +39,6 @@
     "build": "pnpm run build-fast --dts-resolve",
     "prepublishOnly": "pnpm run build",
     "test": "vitest run",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
     "lint": "eslint --max-warnings 0",
     "lint:fix": "eslint --max-warnings 0 --fix",
     "typecheck": "tsc --noEmit"
