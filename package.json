@@ -15,14 +15,19 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
+      "main": "./dist/index.cjs",
       "import": "./dist/index.mjs"
     },
     "./iconify": {
       "types": "./dist/iconify.d.mts",
+      "main": "./dist/iconify.cjs",
       "import": "./dist/iconify.mjs"
     },
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
