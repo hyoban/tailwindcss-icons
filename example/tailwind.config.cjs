@@ -2,7 +2,7 @@ const {
   iconsPlugin,
   dynamicIconsPlugin,
   getIconCollections,
-} = require('../dist/index.cjs')
+} = require('../dist/index.mjs')
 
 module.exports = {
   content: ['./index.html'],

@@ -46,6 +46,7 @@
     }
   },
   "dependencies": {
+    "@iconify/types": "^2.0.0",
     "@iconify/utils": "^3.1.0"
   },
   "devDependencies": {
@@ -54,7 +55,6 @@
     "@iconify-json/heroicons": "^1.2.3",
     "@iconify/json": "^2.2.433",
     "@iconify/tools": "^5.0.2",
-    "@iconify/types": "^2.0.0",
     "@types/node": "^25.1.0",
     "eslint": "^9.39.2",
     "eslint-config-hyoban": "6.0.0-beta.3",
