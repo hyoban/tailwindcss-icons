@@ -78,7 +78,7 @@ Then you can use the icons in your HTML:
 Search the icon you want to use here: https://icones.js.org
 
 > [!TIP]
-> To get the full list of icon names as typescript type, you can refer to [this issue](https://github.com/egoist/tailwindcss-icons/issues/18#issuecomment-1987191833).
+> To get the full list of icon names as typescript type, you can refer to [this issue](https://github.com/egoist/tailwindcss-icons/issues/18#issuecomment-1987191833) or use [iconify-import-svg](https://github.com/hyoban/iconify-import-svg)
 
 ### Plugin Options
 
